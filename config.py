@@ -114,7 +114,7 @@ def run():
         background_list = ['请选择', 'Good', 'Bad']
         # beard_list = []
         face_shape_list = [
-            '请选择', 'oval', 'diamond', 'rectangle', 'round', 'square'
+            '请选择', 'oval', 'diamond', 'rectangle', 'round', 'square', 'Unable to discern'
         ]
         difficulty_level = [
             'None', 'hairstyle', 'badbg', 'badpose', 'something_cover_face'
@@ -145,7 +145,7 @@ def run():
                                   "background"]).tolist()[0]))
                 face_shape = cols[2].selectbox(
                     '脸型 face shape',
-                    ('请选择', 'oval', 'diamond', 'rectangle', 'round', 'square'),
+                    ('请选择', 'oval', 'diamond', 'rectangle', 'round', 'square', 'Unable to discern'),
                     index=face_shape_list.index(
                         (data.loc[data["name"] == cur,
                                   "face_shape"]).tolist()[0]))
@@ -156,7 +156,7 @@ def run():
                                                ('请选择', 'Good', 'Bad'))
                 face_shape = cols[2].selectbox(
                     '脸型 face shape',
-                    ('请选择', 'oval', 'diamond', 'rectangle', 'round', 'square'))
+                    ('请选择', 'oval', 'diamond', 'rectangle', 'round', 'square', 'Unable to discern'))
 
             cols = st.columns((3))
             if dup == 1:
@@ -353,7 +353,7 @@ def run():
             st.write(df)
         # del_data= st.number_input('line number',min_value=0,max_value=200,step=1)
         del_data = cols[1].selectbox('选择图片，按下按钮后删除该图片的标记', tuple(image_list))
-        if cols[1].button('Delete That Line!'):
+        if cols[1].form_submit_button('Delete That Line!'):
             df.drop(df[df['name'] == del_data].index, inplace=True)
             df.to_csv(file, index=False)
 

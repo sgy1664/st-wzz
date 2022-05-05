@@ -353,7 +353,7 @@ def run():
             st.write(df)
         # del_data= st.number_input('line number',min_value=0,max_value=200,step=1)
         del_data = cols[1].selectbox('选择图片，按下按钮后删除该图片的标记', tuple(image_list))
-        if cols[1].form_submit_button('Delete That Line!'):
+        if cols[1].button('Delete That Line!'):
             df.drop(df[df['name'] == del_data].index, inplace=True)
             df.to_csv(file, index=False)
 
